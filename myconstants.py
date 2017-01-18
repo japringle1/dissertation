@@ -53,6 +53,29 @@ TEAM_MAP = {
     "-" : 1.0
 }
 
+TEAM_CODES = {
+    1: "ARS",
+    2: "BOU",
+    3: "BUR",
+    4: "CHE",
+    5: "CRY",
+    6: "EVE",
+    7: "HUL",
+    8: "LEI",
+    9: "LIV",
+    10: "MCI",
+    11: "MUN",
+    12: "MID",
+    13: "SOU",
+    14: "STK",
+    15: "SUN",
+    16: "SWA",
+    17: "TOT",
+    18: "WAT",
+    19: "WBA",
+    20: "WHU"
+}
+
 HOME_AWAY_MAP = {
     "H" : 1.09,
     "A" : 0.91,
@@ -100,4 +123,4 @@ ELEMENT_TYPES = {
 
 VIABLE_FORMATIONS = [[3,4,3],[3,5,2],[4,3,3],[4,4,2],[4,5,1],[5,3,2],[5,4,1],[5,2,3]]
 
-GW_COUNT = 33
+GW_COUNT = 21
