@@ -11,7 +11,6 @@ def run_forecasts():
     players = list(myconstants.PLAYER_COLLECTION.find())
 
     maps = get_maps(players)
-    print maps
     team_map = maps["teams"]
     home_away_map = maps["home_away"]
 
@@ -22,6 +21,7 @@ def run_forecasts():
         oppositions = []
         home_away = []
         points = []
+        values = []
 
         fh = player["fixture_history"]
 
@@ -30,6 +30,7 @@ def run_forecasts():
             points.append(fixture["total_points"])
             mins_played.append(fixture["minutes"])
             net_transfers.append(fixture["transfers_balance"])
+            values.append(fixture["value"])
             oppositions.append([TEAM_CODES[fixture["opponent_team"]]])
             home_away.append(["H" if fixture["was_home"] else "A"])
 
@@ -38,6 +39,9 @@ def run_forecasts():
 
         net_transfers = net_transfers[1:]
         net_transfers.append(player["info"]["transfers_in_event"] - player["info"]["transfers_out_event"])
+
+        values = values[1:]
+        values.append(player["info"]["now_cost"])
 
         oppositions = oppositions[1:]
         home_away = home_away[1:]
@@ -68,7 +72,8 @@ def run_forecasts():
                                        "net_transfers": net_transfers[idx],
                                        "opposition": oppositions[idx],
                                        "home_away": home_away[idx],
-                                       "points": points[idx]
+                                       "points": points[idx],
+                                       "value": values[idx]
                                        }
 
         if player["info"]["web_name"] == "Kane":
@@ -95,10 +100,10 @@ def exponential_smoothing(actual_gws, forecast_gws, smoothing_factor, player, op
         forecast = 0
         for gw_fixture in range(0, len(oppositions[idx])):
             if idx == 0:
-                nforecast = player["fixture_history"][key]["total_points"] * team_map[oppositions[idx][gw_fixture]] * home_away_map[home_away[idx][gw_fixture]]
+                nforecast = player["fixture_history"][key]["total_points"]
             else:
                 nforecast = forecasts[forecast_gws[idx - 1]] + (smoothing_factor * (player['fixture_history'][forecast_gws[idx - 1]]['total_points'] - forecasts[forecast_gws[idx - 1]]))
-                nforecast = (nforecast * team_map[oppositions[idx][gw_fixture]] * home_away_map[home_away[idx][gw_fixture]])
+                # nforecast = (nforecast * team_map[oppositions[idx][gw_fixture]] * home_away_map[home_away[idx][gw_fixture]])
             forecast += nforecast
         forecasts[forecast_gws[idx]] = forecast
     return forecasts

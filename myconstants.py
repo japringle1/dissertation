@@ -123,4 +123,4 @@ ELEMENT_TYPES = {
 
 VIABLE_FORMATIONS = [[3,4,3],[3,5,2],[4,3,3],[4,4,2],[4,5,1],[5,3,2],[5,4,1],[5,2,3]]
 
-GW_COUNT = 21
+GW_COUNT = 24
