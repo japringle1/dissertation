@@ -1,4 +1,4 @@
-import urllib2, json, myconstants
+import urllib.request, urllib.error, json, myconstants
 
 def populate_collection(collection, players):
     for player in players:
@@ -22,7 +22,7 @@ def format_player(player_data):
 
 
 def get_player_info():
-    resource = urllib2.urlopen('https://fantasy.premierleague.com/drf/bootstrap-static')
+    resource = urllib.request.urlopen('https://fantasy.premierleague.com/drf/bootstrap-static')
     player_data = json.load(resource)
     return player_data["elements"]
 
@@ -31,20 +31,20 @@ def scrape_player_data(start_url):
     players = []
     i = start_url
     errorflag = False
-    print "Scraping...\n"
+    print("Scraping...\n")
 
     while (errorflag == False):
         try:
             if (i % 50 == 0):
-                print str(i) + " players scraped."
-            resource = urllib2.urlopen('https://fantasy.premierleague.com/drf/element-summary/%d' % (i))
+                print(str(i) + " players scraped.")
+            resource = urllib.request.urlopen('https://fantasy.premierleague.com/drf/element-summary/%d' % (i))
             player_data = json.load(resource)
             player_data["info"] = player_info[i-1]
             players.append(format_player(player_data))
             i += 1
         except ValueError:
-            print str(i) + " wasn't a valid JSON."
-        except urllib2.URLError:
+            print(str(i) + " wasn't a valid JSON.")
+        except urllib.error.URLError:
             errorflag = True
-    print str(len(players)) + " players scraped.\n"
+    print(str(len(players)) + " players scraped.\n")
     return players

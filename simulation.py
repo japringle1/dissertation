@@ -4,7 +4,7 @@ import substitutions
 
 
 def run_simulation():
-    print "Simulating season..."
+    print("Simulating season...")
 
     total_points = 0
 
@@ -28,7 +28,7 @@ def run_simulation():
             else:
                 budget = highest
 
-        print "GW: " + str(gw) + " Budget: " + str(budget / 10.0)
+        print("GW: " + str(gw) + " Budget: " + str(budget / 10.0))
 
         # Get squads
         results = squad_selection.get_combinations(myconstants.FORECASTS_COLLECTION, gw, budget)
@@ -50,7 +50,7 @@ def run_simulation():
             {"_id": 0, "info.id": 1, "info.web_name": 1, "fixture_history": 1})
 
         for p in players:
-            actual_gws = p["fixture_history"].keys()
+            actual_gws = list(p["fixture_history"].keys())
             next_gw = actual_gws.index(str(gw)) + 1
 
             if next_gw in actual_gws:
@@ -74,6 +74,7 @@ def run_simulation():
 
         # Add actual points scored and round forecasts to 0 dp
         for player in top_team["first_team"]:
+            print(actuals)
             player.append(actuals[player[0]]["actual_points"])
             player.append(actuals[player[0]]["mins_played"])
 
@@ -102,13 +103,13 @@ def run_simulation():
         print_team(top_team)
 
     # Print total points over season!
-    print "Total points for season: " + str(total_points)
-    print
+    print("Total points for season: " + str(total_points))
+    print()
 
     # Print team for upcoming week...
 
     if (myconstants.GW_COUNT + 1 < 39):
-        print "Getting squad for upcoming gameweek..."
+        print("Getting squad for upcoming gameweek...")
         results = squad_selection.get_combinations(myconstants.FORECASTS_COLLECTION, myconstants.GW_COUNT + 1, 1000)
         team = results[-1]
         team["actual_points"] = "N/A"
@@ -117,17 +118,17 @@ def run_simulation():
 
 def print_team(team):
     # Print the team you've picked
-    print "Formation:"
-    print team["formation"]
-    print "First team: "
+    print("Formation:")
+    print(team["formation"])
+    print("First team: ")
     for player in team["first_team"]:
-        print player
-    print "Subs: "
+        print(player)
+    print("Subs: ")
     for player in team["subs"]:
-        print player
-    print "Captain: \n" + str(team["captain"])
-    print "Vice Captain: \n" + str(team["vice_captain"])
-    print "Total Cost: \n" + str(int(team["total_cost"]) / 10.0)
-    print "Forecasted Points: \n" + str(team["forecasted_points"])
-    print "Actual points: \n" + str(team["actual_points"])
-    print
+        print(player)
+    print("Captain: \n" + str(team["captain"]))
+    print("Vice Captain: \n" + str(team["vice_captain"]))
+    print("Total Cost: \n" + str(int(team["total_cost"]) / 10.0))
+    print("Forecasted Points: \n" + str(team["forecasted_points"]))
+    print("Actual points: \n" + str(team["actual_points"]))
+    print()

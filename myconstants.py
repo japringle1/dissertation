@@ -55,20 +55,20 @@ TEAM_MAP = {
 
 TEAM_CODES = {
     1: "ARS",
-    2: "BOU",
-    3: "BUR",
-    4: "CHE",
-    5: "CRY",
-    6: "EVE",
-    7: "HUL",
-    8: "LEI",
-    9: "LIV",
-    10: "MCI",
-    11: "MUN",
-    12: "MID",
-    13: "SOU",
-    14: "STK",
-    15: "SUN",
+    2: "BHA",
+    3: "BOU",
+    4: "BUR",
+    5: "CHE",
+    6: "CRY",
+    7: "EVE",
+    8: "HUD",
+    9: "LEI",
+    10: "LIV",
+    11: "MCI",
+    12: "MUN",
+    13: "NEW",
+    14: "SOU",
+    15: "STK",
     16: "SWA",
     17: "TOT",
     18: "WAT",
@@ -123,4 +123,4 @@ ELEMENT_TYPES = {
 
 VIABLE_FORMATIONS = [[3,4,3],[3,5,2],[4,3,3],[4,4,2],[4,5,1],[5,3,2],[5,4,1],[5,2,3]]
 
-GW_COUNT = 24
+GW_COUNT = 10

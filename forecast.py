@@ -1,12 +1,12 @@
 import myconstants
-from numpy import mean
+from statistics import mean
 from copy import deepcopy
 import natsort
 
 from myconstants import TEAM_CODES
 
 def run_forecasts():
-    print "Running forecasts."
+    print("Running forecasts.")
 
     players = list(myconstants.PLAYER_COLLECTION.find())
 
@@ -77,9 +77,9 @@ def run_forecasts():
                                        }
 
         if player["info"]["web_name"] == "Kane":
-            print player["info"]["web_name"]
+            print(player["info"]["web_name"])
             for key in natsort.natsorted(compiled_forecasts.keys()):
-                print str(key) + ": " + str(compiled_forecasts[key])
+                print(str(key) + ": " + str(compiled_forecasts[key]))
             print
 
         json_data = {
@@ -92,7 +92,8 @@ def run_forecasts():
 
         myconstants.FORECASTS_COLLECTION.insert(json_data)
 
-    print "Forecasting finished!\n"
+    print("Forecasting finished!\n")
+
 
 def exponential_smoothing(actual_gws, forecast_gws, smoothing_factor, player, oppositions, team_map, home_away, home_away_map):
     forecasts = {}

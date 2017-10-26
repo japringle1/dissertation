@@ -3,7 +3,6 @@ import myconstants
 import forecast
 import squad_selection
 import simulation
-import evaluation
 
 # Scrape data
 # players = scraper.scrape_player_data(1)

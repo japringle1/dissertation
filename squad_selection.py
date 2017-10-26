@@ -19,7 +19,7 @@ def get_combinations(collection, gameweek_no, budget):
             previous_fetched = fetched_players
 
         counts = {}
-        for position, players in fetched_players.iteritems():
+        for position, players in fetched_players.items():
             counts[position] = len(fetched_players[position])
 
         if not combinations:
@@ -39,7 +39,7 @@ def get_combinations(collection, gameweek_no, budget):
 def get_points_limits(collection, gameweek_no):
     points_limits = {}
 
-    for key, value in myconstants.ELEMENT_TYPES.iteritems():
+    for key, value in myconstants.ELEMENT_TYPES.items():
         top_player = list(
             collection.find({"$and": [{"element_type_id": value["TYPE_ID"]}, {"fixture_history": {"$exists": True}}]},
                             {"_id": 0, "id": 1, "fixture_history": 1, "web_name": 1}).sort(
@@ -53,7 +53,7 @@ def fetch_players(collection, gameweek_no, points_limits):
     all_players = {}
     points_limits = deepcopy(points_limits)
 
-    for key, value in myconstants.ELEMENT_TYPES.iteritems():
+    for key, value in myconstants.ELEMENT_TYPES.items():
         point_limit = points_limits[key]
 
         enough_players = False
@@ -73,7 +73,7 @@ def fetch_players(collection, gameweek_no, points_limits):
 
     formatted_players = {}
 
-    for key, value in all_players.iteritems():
+    for key, value in all_players.items():
         holder = []
         for p in value:
             holder.append([p['id'], p['element_type_id'], p['web_name'], p['team_name'],
